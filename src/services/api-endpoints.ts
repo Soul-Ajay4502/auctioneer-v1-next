@@ -9,21 +9,14 @@ const endpoints = Object.freeze({
         forgotPassword: '/auth/forgot-password',
         resetPassword: '/auth/reset-password',
     },
-    onboarding: {
-        inviteTeam: '/invite-team',
-        createWorkSpace: '/workspace',
-    },
     user: {
         me: 'user/me',
         profile: '/user/',
+        statistics: '/user/stats/me'
     },
-    project: {
-        createProject: '/project',
-        listProjects: '/project',
-    },
-    llm: {
-        chat: '/chat/',
-    },
+    leagues: {
+        all: '/leagues'
+    }
 })
 
 export default endpoints

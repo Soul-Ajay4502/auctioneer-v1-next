@@ -21,7 +21,7 @@ const staticData = {
         },
         {
             title: 'Leagues',
-            url: '/app/scratchpad',
+            url: '/app/leagues',
             icon: NotepadText,
         },
 
@@ -30,8 +30,6 @@ const staticData = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const user = useAuthStore((state) => state.user)
-    console.log(user);
-
     const data = {
         ...staticData,
         user: {
