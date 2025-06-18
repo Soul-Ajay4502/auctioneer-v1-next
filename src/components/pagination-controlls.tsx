@@ -8,6 +8,13 @@ import {
     PaginationNext,
     PaginationPrevious
 } from '@/components/ui/pagination'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from '@/components/ui/select'
 
 export interface PaginationProps {
     total: number
@@ -63,38 +70,70 @@ export const PaginationControls: React.FC<PaginationProps> = ({
         return pageNumbers
     }
 
+    // Generate all page options for the select dropdown
+    const getPageOptions = () => {
+        const options = []
+        for (let i = 1; i <= totalPages; i++) {
+            options.push(i)
+        }
+        return options
+    }
+
     return (
-        <Pagination className="my-4">
-            <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious
-                        onClick={() => hasPrevious && onPageChange(currentPage - 1)}
-                        className={!hasPrevious ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                    />
-                </PaginationItem>
-
-                {getPageNumbers().map((pageNumber, index) => (
-                    <PaginationItem key={index}>
-                        {pageNumber === 'ellipsis' ? (
-                            <PaginationEllipsis />
-                        ) : (
-                            <PaginationLink
-                                onClick={() => onPageChange(pageNumber)}
-                                isActive={currentPage === pageNumber}
-                            >
-                                {pageNumber}
-                            </PaginationLink>
-                        )}
+        <div className="flex w-full items-center gap-4">
+            <Pagination className="my-4">
+                <PaginationContent>
+                    <PaginationItem>
+                        <PaginationPrevious
+                            onClick={() => hasPrevious && onPageChange(currentPage - 1)}
+                            className={!hasPrevious ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                        />
                     </PaginationItem>
-                ))}
 
-                <PaginationItem>
-                    <PaginationNext
-                        onClick={() => hasNext && onPageChange(currentPage + 1)}
-                        className={!hasNext ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                    />
-                </PaginationItem>
-            </PaginationContent>
-        </Pagination>
+                    {getPageNumbers().map((pageNumber, index) => (
+                        <PaginationItem key={index}>
+                            {pageNumber === 'ellipsis' ? (
+                                <PaginationEllipsis />
+                            ) : (
+                                <PaginationLink
+                                    onClick={() => onPageChange(pageNumber)}
+                                    isActive={currentPage === pageNumber}
+                                >
+                                    {pageNumber}
+                                </PaginationLink>
+                            )}
+                        </PaginationItem>
+                    ))}
+
+                    <PaginationItem>
+                        <PaginationNext
+                            onClick={() => hasNext && onPageChange(currentPage + 1)}
+                            className={!hasNext ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                        />
+                    </PaginationItem>
+                </PaginationContent>
+            </Pagination>
+
+            {totalPages > 5 && (
+                <div className="flex  items-center gap-2 text-sm">
+                    <Select
+                        value={currentPage.toString()}
+                        onValueChange={(value) => onPageChange(parseInt(value))}
+                    >
+                        <SelectTrigger className="w-fit h-8">
+                            <SelectValue placeholder={currentPage} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {getPageOptions().map((page) => (
+                                <SelectItem key={page} value={page.toString()}>
+                                    {page}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    of<p className="text-muted-foreground  "> {totalPages}</p>
+                </div>
+            )}
+        </div>
     )
 }

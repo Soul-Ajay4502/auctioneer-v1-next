@@ -1,5 +1,5 @@
 
-export default function LeaguesLayout({
+export default function Layout({
     children,
 }: {
     children: React.ReactNode
@@ -7,7 +7,7 @@ export default function LeaguesLayout({
 
     return (
 
-        <div className="flex-1 overflow-auto">
+        <div className=" overflow-auto">
             {children}
         </div>
 

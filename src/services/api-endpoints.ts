@@ -15,7 +15,8 @@ const endpoints = Object.freeze({
         statistics: '/user/stats/me'
     },
     leagues: {
-        all: '/leagues'
+        all: '/leagues',
+        getById: '/leagues/:id',
     }
 })
 

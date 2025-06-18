@@ -11,5 +11,9 @@ export const leaguesService = {
             },
         })
         return response.data
+    },
+    getLeagueById: async (leagueId: string): Promise<ApiResponse<League>> => {
+        const response = await api.get(endpoints.leagues.getById.replace(':id', leagueId))
+        return response.data
     }
 }

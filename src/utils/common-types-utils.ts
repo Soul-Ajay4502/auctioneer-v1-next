@@ -5,28 +5,38 @@ export interface LeagueCreator {
 }
 
 export interface League {
-    league_id: number;
-    league_name?: string;
-    league_full_name?: string;
-    league_locations?: string;
-    total_players?: number;
-    total_teams?: number;
-    has_unsold?: boolean;
-    league_start_date?: string;
-    league_end_date?: string;
-    registration_fee?: string;
-    registration_end_date?: string;
-    player_base_price?: string;
-    bid_amount_per_team?: string;
-    auction_start_date?: string;
-    break_points?: string; // You can convert to number[] if needed
-    increments?: string;   // You can convert to number[] if needed
-    minimum_player_count?: number;
-    created_at?: string;
-    createdAt?: string;
-    updatedAt?: string | null;
-    deletedAt?: string | null;
-    creator?: LeagueCreator;
+    league_id: number
+    league_name: string
+    league_full_name: string
+    league_locations: string
+    total_players: number
+    total_teams: number
+    has_unsold: boolean
+    league_start_date: string
+    league_end_date: string
+    registration_fee: string
+    created_by: number
+    registration_end_date: string
+    player_base_price: string
+    bid_amount_per_team: string
+    auction_start_date: string
+    break_points: string
+    increments: string
+    minimum_player_count: number
+    created_at: string
+    updated_at: string | null
+    deleted_at: string | null
+    join_link: string
+    createdAt: string
+    updatedAt: string | null
+    deletedAt: string | null
+    creator: {
+        id: number
+        display_name: string
+        email: string
+    }
+    registered_teams_count: number
+    registered_players_count: number
 }
 
 export interface Pagination {

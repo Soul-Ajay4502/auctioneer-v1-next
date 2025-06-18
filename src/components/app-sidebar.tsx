@@ -4,11 +4,12 @@ import * as React from 'react'
 import {
     BotMessageSquare,
     NotepadText,
+    Trophy,
 } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import { NavUser } from '@/components/nav-user'
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenuButton, SidebarRail } from '@/components/ui/sidebar'
 import { useAuthStore } from '@/store/auth.store'
 // This is sample data.
 const staticData = {
@@ -37,17 +38,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             email: user?.email ?? '',
             avatar: user?.img_url || '',
         },
-        workspaces: user?.workspaces || [],
     }
 
     return (
         <Sidebar collapsible="icon" variant="floating" {...props}>
-            <SidebarHeader>
-                head
+            <SidebarHeader >
+                <SidebarMenuButton>
+                    <Trophy className="h-6 w-6" /> <div className='text-sm font-bold'> Auctioneer</div>
+                </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent className="mt-3">
                 <NavMain items={data.navMain} />
-                {/* <NavProjects projects={data.projects} /> */}
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />

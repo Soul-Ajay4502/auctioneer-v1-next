@@ -5,15 +5,20 @@ import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Trophy, Users, Calendar, Plus, Loader2 } from 'lucide-react'
+import { Trophy, Users, Calendar, Plus, Loader2, Copy } from 'lucide-react'
 import { PaginationControls } from '@/components/pagination-controlls'
 import { leaguesService } from '@/services/leagues.services'
 import { League } from '@/utils/common-types-utils'
 import { formatDate } from '@/utils/format-date.utils'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
+import LeagueCard from './league-components/league-card'
 
 export default function LeaguesPage() {
     const [page, setPage] = useState(1)
+    const [isCopying, setIsCopying] = useState(false)
     const pageSize = 9
+    const router = useRouter()
 
     const {
         data,
@@ -33,6 +38,20 @@ export default function LeaguesPage() {
         setPage(newPage)
         // Scroll to top when changing pages
         window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
+    const handleCopyLink = (league: League) => {
+        const url = league.join_link || ''
+        navigator.clipboard.writeText(url)
+        setIsCopying(true)
+        setTimeout(() => {
+            setIsCopying(false)
+        }, 4000)
+        toast.success(`Join Link of ${league.league_name} copied to clipboard`)
+    }
+
+    const handleViewDetails = (league: League) => {
+        router.push(`/app/leagues/${league.league_id}`)
     }
 
     if (isLoading) {
@@ -56,15 +75,14 @@ export default function LeaguesPage() {
     }
 
     return (
-        <div className="p-2 max-w-8xl mx-8">
+        <div className="p-2 max-w-8xl mx-8 ">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Leagues</h1>
-                <Button className="flex items-center gap-2">
-                    <Plus size={16} />
-                    <span>Create League</span>
-                </Button>
-            </div>
 
+            </div>
+            <div className="flex z-20 rounded-full border bg-black items-center gap-2 fixed p-0 right-4 bottom-15">
+                <Plus size={80} color='white' />
+            </div>
             {leagues.length === 0 ? (
                 <div className="text-center p-10 border rounded-lg bg-muted/50">
                     <Trophy className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
@@ -88,7 +106,7 @@ export default function LeaguesPage() {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                <Card className="h-full">
+                                {/* <Card className="h-full">
                                     <CardHeader>
                                         <CardTitle className="flex items-center gap-2">
                                             <Trophy className="h-5 w-5 text-amber-500" />
@@ -96,7 +114,7 @@ export default function LeaguesPage() {
                                         </CardTitle>
                                     </CardHeader>
                                     <CardContent>
-                                        <div className="space-y-3">
+                                        <div className="space-y-3 w-full">
                                             <div className="flex items-center gap-2 text-sm">
                                                 <Users className="h-4 w-4 text-gray-500" />
                                                 <span>{league.total_players} members</span>
@@ -109,12 +127,19 @@ export default function LeaguesPage() {
                                                     </>
                                                 )}
                                             </div>
-                                            <div className="mt-4">
-                                                <Button variant="outline" className="w-full">View Details</Button>
+                                            <div className="mt-4 flex gap-2 w-full">
+                                                <Button onClick={() => handleViewDetails(league)} variant="outline" className="w-[90%]">View Details</Button>
+                                                <Button onClick={() => handleCopyLink(league)} disabled={isCopying} size='icon' variant="outline" className="w-fit rounded-full px-2 cursor-pointer"><Copy /> </Button>
                                             </div>
                                         </div>
                                     </CardContent>
-                                </Card>
+                                </Card> */}
+                                <LeagueCard
+                                    leagueData={league}
+                                    handleCopyLink={() => handleCopyLink(league)}
+                                    handleViewDetails={() => handleViewDetails(league)}
+                                    isCopying={isCopying}
+                                />
                             </motion.div>
                         ))}
                     </motion.div>
