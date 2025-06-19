@@ -107,8 +107,8 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
         <div className="min-h-screen p-2 md:p-4">
             <div className="max-w-7xl mx-auto ">
                 {/* Header Section */}
-                <div className="flex gap-2">
-                    <div className="w-2/3 bg-white rounded-sm border shadow-lg p-6 md:p-8">
+                <div className="block md:flex   gap-2">
+                    <div className="w-full mb-2 md:mb-0 md:w-2/3 bg-white rounded-sm border shadow-lg p-6 md:p-8">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                             <div className="space-y-2">
                                 <div className="flex items-center gap-3">
@@ -141,29 +141,27 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                             </div>
                         </div>
                     </div>
-                    <Card className="w-1/3 rounded-sm">
+                    <Card className="w-full md:w-1/3 rounded-sm">
                         <CardHeader>
                             <CardTitle>Quick Actions</CardTitle>
                         </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-2 gap-4">
-                                <Button className="h-12" variant="outline">
-                                    <Users className="h-4 w-4 mr-2" />
-                                    View Teams
-                                </Button>
-                                <Button className="h-12" variant="outline">
-                                    <UserPlus className="h-4 w-4 mr-2" />
-                                    View Players
-                                </Button>
-                                <Button className="h-12" variant="outline">
-                                    <Trophy className="h-4 w-4 mr-2" />
-                                    Start Auction
-                                </Button>
-                                <Button className="h-12" variant="outline">
-                                    <Settings className="h-4 w-4 mr-2" />
-                                    League Settings
-                                </Button>
-                            </div>
+                        <CardContent className="grid grid-cols-2 gap-4">
+                            <Button className="h-12" variant="outline">
+                                <Users className="h-4 w-4 mr-2" />
+                                View Teams
+                            </Button>
+                            <Button className="h-12" variant="outline">
+                                <UserPlus className="h-4 w-4 mr-2" />
+                                View Players
+                            </Button>
+                            <Button className="h-12" variant="outline">
+                                <Trophy className="h-4 w-4 mr-2" />
+                                Start Auction
+                            </Button>
+                            <Button className="h-12" variant="outline">
+                                <Settings className="h-4 w-4 mr-2" />
+                                League Settings
+                            </Button>
                         </CardContent>
                     </Card>
 
@@ -353,25 +351,23 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                         <CardHeader>
                             <CardTitle>Quick Actions</CardTitle>
                         </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                                <Button className="h-12" variant="outline">
-                                    <Users className="h-4 w-4 mr-2" />
-                                    View Teams
-                                </Button>
-                                <Button className="h-12" variant="outline">
-                                    <UserPlus className="h-4 w-4 mr-2" />
-                                    View Players
-                                </Button>
-                                <Button className="h-12" variant="outline">
-                                    <Trophy className="h-4 w-4 mr-2" />
-                                    Start Auction
-                                </Button>
-                                <Button className="h-12" variant="outline">
-                                    <Settings className="h-4 w-4 mr-2" />
-                                    League Settings
-                                </Button>
-                            </div>
+                        <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <Button className="h-12" variant="outline">
+                                <Users className="h-4 w-4 mr-2" />
+                                View Teams
+                            </Button>
+                            <Button className="h-12" variant="outline">
+                                <UserPlus className="h-4 w-4 mr-2" />
+                                View Players
+                            </Button>
+                            <Button className="h-12" variant="outline">
+                                <Trophy className="h-4 w-4 mr-2" />
+                                Start Auction
+                            </Button>
+                            <Button className="h-12" variant="outline">
+                                <Settings className="h-4 w-4 mr-2" />
+                                League Settings
+                            </Button>
                         </CardContent>
                     </Card>
 

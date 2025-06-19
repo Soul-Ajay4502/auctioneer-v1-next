@@ -48,16 +48,14 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
 
     return (
         <Card className="w-full max-w-md rounded-sm">
-            <CardHeader>
+            <CardHeader className="border-b-4 border-b-neutral-800 rounded-full">
                 <div className="flex items-center justify-between">
                     <CardTitle className="text-xl font-bold">{leagueData.league_name}</CardTitle>
                     <Badge variant={isRegistrationOpen ? "default" : "secondary"}>{isRegistrationOpen ? "Open" : "Closed"}</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">{leagueData.league_locations}</p>
-            </CardHeader>
 
-            <CardContent className="space-y-4">
-                <div className="grid grid-cols-3 gap-4 border-b-2  py-1 pl-2 rounded-full">
+                <div className="grid grid-cols-3 gap-4 py-1 pl-2 ">
                     <div className="flex items-center gap-2">
                         <Users className="h-4 w-4 text-muted-foreground" />
                         <div className="text-sm">
@@ -77,10 +75,14 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
                         <IndianRupee className="h-4 w-4 text-muted-foreground" />
                         <div className="text-sm">
                             <p className="font-medium">₹{leagueData.registration_fee}</p>
-                            <p className="text-muted-foreground">Registration</p>
+                            <p className="text-muted-foreground">Reg Fee</p>
                         </div>
                     </div>
                 </div>
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+
 
 
 
@@ -106,7 +108,7 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
             </CardContent>
 
             <CardFooter className="flex gap-2">
-                <Button className="flex-1" onClick={() => handleViewDetails()}>
+                <Button variant='outline' className="flex-1 rounded-sm" onClick={() => handleViewDetails()}>
                     View Details
                 </Button>
                 <Button disabled={isCopying} onClick={() => handleCopyLink()} variant="outline" size="icon">

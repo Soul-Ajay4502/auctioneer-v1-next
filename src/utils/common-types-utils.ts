@@ -47,3 +47,23 @@ export interface Pagination {
     hasNext: boolean
     hasPrevious: boolean
 }
+
+export interface Teams {
+    id: number
+    team_name: string
+    league_id: number
+    max_amount_for_bid: string
+    max_amount_per_player: string
+    balance_amount: string
+    is_auction_started: boolean
+    created_date: string
+    updated_date: string
+    deleted_date: string
+    createdAt: string
+    updatedAt: string
+    deletedAt: string
+    league: League
+    team_owner: string
+    team_owner_phone: string
+    jersey_color: string
+}

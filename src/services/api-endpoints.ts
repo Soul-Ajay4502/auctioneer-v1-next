@@ -17,6 +17,10 @@ const endpoints = Object.freeze({
     leagues: {
         all: '/leagues',
         getById: '/leagues/:id',
+    },
+    teams: {
+        all: '/teams/',
+        getById: '/teams/:id',
     }
 })
 
