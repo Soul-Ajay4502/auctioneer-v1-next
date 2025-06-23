@@ -1,4 +1,4 @@
-import { api, ApiResponse } from "@/config/axios-config"
+import { api, apiAuth, ApiResponse } from "@/config/axios-config"
 import { League, Pagination } from "../utils/common-types-utils"
 import endpoints from "./api-endpoints"
 
@@ -15,5 +15,10 @@ export const leaguesService = {
     getLeagueById: async (leagueId: string): Promise<ApiResponse<League>> => {
         const response = await api.get(endpoints.leagues.getById.replace(':id', leagueId))
         return response.data
+    },
+    getLeagueByUuid: async (uuid: string): Promise<ApiResponse<League>> => {
+        const response = await apiAuth.get(endpoints.meta.getLeagueByUuid.replace(':uuid', uuid))
+        return response.data
     }
+
 }

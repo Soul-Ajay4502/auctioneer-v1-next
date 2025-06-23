@@ -48,7 +48,7 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
 
     return (
         <Card className="w-full max-w-md rounded-sm">
-            <CardHeader className="border-b-4 border-b-neutral-800 rounded-full">
+            <CardHeader className="border-b-4 border-b-neutral-300 rounded-full">
                 <div className="flex items-center justify-between">
                     <CardTitle className="text-xl font-bold">{leagueData.league_name}</CardTitle>
                     <Badge variant={isRegistrationOpen ? "default" : "secondary"}>{isRegistrationOpen ? "Open" : "Closed"}</Badge>
