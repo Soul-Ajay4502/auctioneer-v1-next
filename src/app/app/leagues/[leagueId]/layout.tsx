@@ -1,3 +1,4 @@
+import Navbar from "../league-components/navbar"
 
 export default function Layout({
     children,
@@ -7,8 +8,13 @@ export default function Layout({
 
     return (
 
-        <div className=" overflow-auto">
-            {children}
+        <div className="overflow-hidden">
+            <div className="fixed top-0 pt-2 bg-white  z-50 w-full flex justify-center">
+                <Navbar />
+            </div>
+            <div className="mt-16">
+                {children}
+            </div>
         </div>
 
     )

@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { toast } from "sonner"
 import { useState } from "react"
+import NavigationButtons from "../league-components/navigation-buttons"
 
 export interface LeagueData {
     league_id: number
@@ -104,7 +105,7 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
     }
 
     return (
-        <div className="min-h-screen p-2 md:p-4">
+        <div className="min-h-[78vh] p-2 md:p-4">
             <div className="max-w-7xl mx-auto ">
                 {/* Header Section */}
                 <div className="block md:flex   gap-2">
@@ -145,28 +146,14 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                         <CardHeader>
                             <CardTitle>Quick Actions</CardTitle>
                         </CardHeader>
-                        <CardContent className="grid grid-cols-2 gap-4">
-                            <Button className="h-12" variant="outline">
-                                <Users className="h-4 w-4 mr-2" />
-                                View Teams
-                            </Button>
-                            <Button className="h-12" variant="outline">
-                                <UserPlus className="h-4 w-4 mr-2" />
-                                View Players
-                            </Button>
-                            <Button className="h-12" variant="outline">
-                                <Trophy className="h-4 w-4 mr-2" />
-                                Start Auction
-                            </Button>
-                            <Button className="h-12" variant="outline">
-                                <Settings className="h-4 w-4 mr-2" />
-                                League Settings
-                            </Button>
+                        <CardContent>
+                            <NavigationButtons />
+
                         </CardContent>
                     </Card>
 
                 </div>
-                <ScrollArea className="h-118" type="scroll">
+                <ScrollArea className="h-105" type="scroll">
                     {/* Status Cards */}
                     <div className="my-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <Card className="rounded-sm">
@@ -351,23 +338,8 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                         <CardHeader>
                             <CardTitle>Quick Actions</CardTitle>
                         </CardHeader>
-                        <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <Button className="h-12" variant="outline">
-                                <Users className="h-4 w-4 mr-2" />
-                                View Teams
-                            </Button>
-                            <Button className="h-12" variant="outline">
-                                <UserPlus className="h-4 w-4 mr-2" />
-                                View Players
-                            </Button>
-                            <Button className="h-12" variant="outline">
-                                <Trophy className="h-4 w-4 mr-2" />
-                                Start Auction
-                            </Button>
-                            <Button className="h-12" variant="outline">
-                                <Settings className="h-4 w-4 mr-2" />
-                                League Settings
-                            </Button>
+                        <CardContent>
+                            <NavigationButtons buttonContainerClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" />
                         </CardContent>
                     </Card>
 
