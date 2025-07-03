@@ -7,6 +7,8 @@ import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation"
 import { LeagueDashboard } from "./league-dashboard";
 import { League } from "@/utils/common-types-utils";
+import { useLeagueStore } from "@/store/league-details.store";
+import { useEffect } from "react";
 
 const Page = () => {
 
@@ -24,6 +26,11 @@ const Page = () => {
         enabled: !!leagueId
     })
 
+    useEffect(() => {
+        if (!data?.data) return
+        useLeagueStore.getState().setLeagueDetails(data?.data)
+    }, [data?.data])
+
     if (isLoading) {
         return (
             <div className="flex items-center justify-center h-64">
@@ -34,6 +41,9 @@ const Page = () => {
     if (!data?.data) {
         return null
     }
+
+
+
 
     return (
         <div>

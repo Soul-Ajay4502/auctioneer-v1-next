@@ -6,6 +6,8 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useParams, usePathname } from "next/navigation"
+import { useLeagueStore } from "@/store/league-details.store"
+import { toast } from "sonner"
 
 
 
@@ -14,6 +16,15 @@ export default function Navbar() {
     const [hoveredItem, setHoveredItem] = useState<string | null>(null)
     const { leagueId } = useParams();
     const currentPath = usePathname();
+    const { leagueData } = useLeagueStore();
+    console.log(leagueData);
+
+
+    const copyLeagueLink = () => {
+        if (!leagueData) return
+        navigator.clipboard.writeText(leagueData.join_link)
+        toast.success("Join link copied to clipboard")
+    }
 
     // Static navigation data - simplified without sub-items
     const navigationItems = [
@@ -29,8 +40,8 @@ export default function Navbar() {
         },
         {
             label: "Players",
-            href: `/app/leagues/${leagueId}/players`,
-            active: currentPath.includes(`/app/leagues/${leagueId}/players`),
+            href: `/app/leagues/${leagueId}/player-details`,
+            active: currentPath.includes(`/app/leagues/${leagueId}/player-details`),
         },
         {
             label: "Auction",
@@ -96,8 +107,10 @@ export default function Navbar() {
 
                     {/* CTA Button with animation */}
                     <div className="hidden md:flex">
-                        <Button className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
-                            <span className="relative z-10">Get Started</span>
+                        <Button
+                            onClick={copyLeagueLink}
+                            className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
+                            <span className="relative z-10">Copy Link</span>
                             <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                         </Button>
                     </div>
@@ -156,9 +169,9 @@ export default function Navbar() {
                                 <div className="pt-4 px-2">
                                     <Button
                                         className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={() => { copyLeagueLink(); setIsOpen(false) }}
                                     >
-                                        Get Started
+                                        copy Link
                                     </Button>
                                 </div>
                             </div>

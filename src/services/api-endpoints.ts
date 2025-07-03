@@ -24,6 +24,10 @@ const endpoints = Object.freeze({
     },
     meta: {
         getLeagueByUuid: '/meta/get-league/:uuid',
+    },
+    players: {
+        all: '/players/',
+        getById: '/players/:id',
     }
 })
 
