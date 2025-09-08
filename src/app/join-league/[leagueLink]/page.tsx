@@ -13,7 +13,7 @@ const JoinToLeague = () => {
     const [isEmailVerified, setIsEmailVerified] = useState(false)
     const { leagueLink } = useParams();
     const leagueLinkStr = Array.isArray(leagueLink) ? leagueLink[0] : leagueLink;
-    const uuid = leagueLinkStr?.split("league1-")[1];
+    const uuid = leagueLinkStr?.substring(leagueLinkStr.indexOf("-") + 1);
     const onAfterEmailVerification = () => {
         setTimeout(() => {
             setIsEmailVerified(true)
@@ -28,7 +28,7 @@ const JoinToLeague = () => {
 
     return (
         <div>
-            {isEmailVerified ? (
+            {!isEmailVerified ? (
                 <EmailVerification onAfterEmailVerification={onAfterEmailVerification} />
             ) : (
                 <RegisterForm leagueDetails={data?.data as League} />
