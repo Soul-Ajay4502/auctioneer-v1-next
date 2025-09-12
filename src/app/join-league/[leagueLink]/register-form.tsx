@@ -22,6 +22,7 @@ import { axiosErrorToast } from '@/utils/axios-error-toast.utils'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/store/auth.store'
 import { useGlobalStateStore } from '@/store/global-state.store'
+import { GenZFileInput } from '@/components/file-input'
 
 const formSchema = z.object({
     player_name: z.string().min(1, 'Player name is required'),
@@ -363,7 +364,7 @@ export default function RegisterForm({ leagueDetails }: { leagueDetails: League 
                                     </h3>
                                     <p className="text-sm text-slate-600">Upload your documents and photos (optional)</p>
 
-                                    <div className="space-y-4">
+                                    <div className="space-x-4 justify-between flex">
                                         <FormField
                                             control={form.control}
                                             name="player_photo"
@@ -371,13 +372,16 @@ export default function RegisterForm({ leagueDetails }: { leagueDetails: League 
                                                 <FormItem>
                                                     <FormLabel className="text-slate-700 font-medium flex items-center gap-2">
                                                         <Camera className="h-4 w-4 text-slate-500" />
-                                                        Player Photo URL
+                                                        Player Photo
                                                     </FormLabel>
                                                     <FormControl>
-                                                        <Input
-                                                            placeholder="Enter player photo URL"
-                                                            className="h-11 border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
-                                                            {...field}
+                                                        <GenZFileInput
+                                                            accept="image/*"
+                                                            onFileSelect={(file) => {
+                                                                if (file) {
+                                                                    field.onChange(file.name)
+                                                                }
+                                                            }}
                                                         />
                                                     </FormControl>
                                                 </FormItem>
@@ -394,10 +398,13 @@ export default function RegisterForm({ leagueDetails }: { leagueDetails: League 
                                                         Payment Screenshot URL
                                                     </FormLabel>
                                                     <FormControl>
-                                                        <Input
-                                                            placeholder="Enter payment screenshot URL"
-                                                            className="h-11 border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
-                                                            {...field}
+                                                        <GenZFileInput
+                                                            accept="image/*"
+                                                            onFileSelect={(file) => {
+                                                                if (file) {
+                                                                    field.onChange(file.name)
+                                                                }
+                                                            }}
                                                         />
                                                     </FormControl>
                                                 </FormItem>
@@ -411,13 +418,16 @@ export default function RegisterForm({ leagueDetails }: { leagueDetails: League 
                                                 <FormItem>
                                                     <FormLabel className="text-slate-700 font-medium flex items-center gap-2">
                                                         <FileText className="h-4 w-4 text-slate-500" />
-                                                        ID Proof URL
+                                                        ID Proof
                                                     </FormLabel>
                                                     <FormControl>
-                                                        <Input
-                                                            placeholder="Enter ID proof URL"
-                                                            className="h-11 border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
-                                                            {...field}
+                                                        <GenZFileInput
+                                                            accept="image/*"
+                                                            onFileSelect={(file) => {
+                                                                if (file) {
+                                                                    field.onChange(file.name)
+                                                                }
+                                                            }}
                                                         />
                                                     </FormControl>
                                                 </FormItem>
