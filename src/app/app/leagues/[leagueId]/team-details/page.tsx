@@ -1,29 +1,27 @@
-"use client"
+'use client'
 
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Phone, User, Palette, Calendar, AlertCircle } from "lucide-react"
-import { useParams } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
-import { teamsService } from "@/services/team.service"
-
-
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Phone, User, Palette, Calendar, AlertCircle } from 'lucide-react'
+import { useParams } from 'next/navigation'
+import { useQuery } from '@tanstack/react-query'
+import { teamsService } from '@/services/team.service'
 
 const getJerseyColorClass = (color: string) => {
     const colorMap: { [key: string]: string } = {
-        Red: "bg-red-500",
-        Blue: "bg-blue-500",
-        Green: "bg-green-500",
-        Yellow: "bg-yellow-500",
-        Orange: "bg-orange-500",
-        Purple: "bg-purple-500",
-        Indigo: "bg-indigo-500",
-        Violet: "bg-violet-500",
-        Pink: "bg-pink-500",
-        Black: "bg-black",
+        Red: 'bg-red-500',
+        Blue: 'bg-blue-500',
+        Green: 'bg-green-500',
+        Yellow: 'bg-yellow-500',
+        Orange: 'bg-orange-500',
+        Purple: 'bg-purple-500',
+        Indigo: 'bg-indigo-500',
+        Violet: 'bg-violet-500',
+        Pink: 'bg-pink-500',
+        Black: 'bg-black',
     }
-    return colorMap[color] || "bg-gray-500"
+    return colorMap[color] || 'bg-gray-500'
 }
 
 const formatCurrency = (amount: string) => {
@@ -31,26 +29,26 @@ const formatCurrency = (amount: string) => {
 }
 
 const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-IN", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
+    return new Date(dateString).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
     })
 }
 
 export default function Page() {
-    const { leagueId } = useParams();
+    const { leagueId } = useParams()
     const { data } = useQuery({
         queryKey: ['teams', leagueId],
         queryFn: () => teamsService.getTeams(leagueId as string),
-        enabled: !!leagueId
+        enabled: !!leagueId,
     })
     if (!data?.data) {
         return null
     }
 
     const teamsData = data?.data || []
-    const leagueName = teamsData[0]?.league?.league_full_name || "Cricket League"
+    const leagueName = teamsData[0]?.league?.league_full_name || 'Cricket League'
 
     return (
         <div className="min-h-screen p-4 md:p-6 lg:p-8">
@@ -70,8 +68,7 @@ export default function Page() {
                     {teamsData?.map((team) => (
                         <Card
                             key={team.id}
-                            className="hover:shadow-lg rounded-sm transition-shadow duration-300 border-2 hover:border-gray-300"
-                        >
+                            className="hover:shadow-lg rounded-sm transition-shadow duration-300 border-2 hover:border-gray-300">
                             <CardHeader className="pb-3">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
@@ -115,7 +112,9 @@ export default function Page() {
                                 <div className="bg-gray-50 rounded-lg p-3 space-y-2">
                                     <div className="flex items-center justify-between text-sm">
                                         <span className="text-gray-600">Total Budget:</span>
-                                        <span className="font-semibold text-green-600">{formatCurrency(team.max_amount_for_bid)}</span>
+                                        <span className="font-semibold text-green-600">
+                                            {formatCurrency(team.max_amount_for_bid)}
+                                        </span>
                                     </div>
 
                                     <div className="flex items-center justify-between text-sm">
@@ -125,14 +124,16 @@ export default function Page() {
 
                                     <div className="flex items-center justify-between text-sm">
                                         <span className="text-gray-600">Max per Player:</span>
-                                        <span className="font-semibold text-orange-600">{formatCurrency(team.max_amount_per_player)}</span>
+                                        <span className="font-semibold text-orange-600">
+                                            {formatCurrency(team.max_amount_per_player)}
+                                        </span>
                                     </div>
                                 </div>
 
                                 {/* Status and Date */}
                                 <div className="flex items-center justify-between pt-2 border-t">
-                                    <Badge variant={team.is_auction_started ? "default" : "secondary"} className="text-xs">
-                                        {team.is_auction_started ? "Active" : "Pending"}
+                                    <Badge variant={team.is_auction_started ? 'default' : 'secondary'} className="text-xs">
+                                        {team.is_auction_started ? 'Active' : 'Pending'}
                                     </Badge>
 
                                     <div className="flex items-center gap-1 text-xs text-gray-500">

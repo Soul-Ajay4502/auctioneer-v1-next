@@ -1,13 +1,25 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Calendar, MapPin, DollarSign, Clock, Users, ChevronDown, ChevronUp, Heart, Share2, Bell, IndianRupee } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { formatDate } from "@/utils/format-date.utils"
-import { RegistrationValidation, RegistrationValidationCompact } from "./registraion-validation"
+import { useState } from 'react'
+import {
+    Calendar,
+    MapPin,
+    DollarSign,
+    Clock,
+    Users,
+    ChevronDown,
+    ChevronUp,
+    Heart,
+    Share2,
+    Bell,
+    IndianRupee,
+} from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { formatDate } from '@/utils/format-date.utils'
+import { RegistrationValidation, RegistrationValidationCompact } from './registraion-validation'
 
 interface LeagueDetails {
     league_full_name: string
@@ -28,8 +40,6 @@ export default function LeagueDetailsCard({ leagueDetails }: LeagueDetailsCardPr
     const [isExpanded, setIsExpanded] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     const [isNotified, setIsNotified] = useState(false)
-
-
 
     const daysUntilRegistration = Math.ceil(
         (new Date(leagueDetails?.registration_end_date).getTime() - new Date().getTime()) / (1000 * 3600 * 24),
@@ -61,22 +71,23 @@ export default function LeagueDetailsCard({ leagueDetails }: LeagueDetailsCardPr
                             variant="ghost"
                             size="sm"
                             className="h-8 w-8 p-0 hover:bg-red-50"
-                            onClick={() => setIsLiked(!isLiked)}
-                        >
+                            onClick={() => setIsLiked(!isLiked)}>
                             <Heart
-                                className={cn("h-4 w-4 transition-colors", isLiked ? "fill-red-500 text-red-500" : "text-slate-400")}
+                                className={cn(
+                                    'h-4 w-4 transition-colors',
+                                    isLiked ? 'fill-red-500 text-red-500' : 'text-slate-400',
+                                )}
                             />
                         </Button>
                         <Button
                             variant="ghost"
                             size="sm"
                             className="h-8 w-8 p-0 hover:bg-blue-50"
-                            onClick={() => setIsNotified(!isNotified)}
-                        >
+                            onClick={() => setIsNotified(!isNotified)}>
                             <Bell
                                 className={cn(
-                                    "h-4 w-4 transition-colors",
-                                    isNotified ? "fill-blue-500 text-blue-500" : "text-slate-400",
+                                    'h-4 w-4 transition-colors',
+                                    isNotified ? 'fill-blue-500 text-blue-500' : 'text-slate-400',
                                 )}
                             />
                         </Button>
@@ -92,13 +103,16 @@ export default function LeagueDetailsCard({ leagueDetails }: LeagueDetailsCardPr
                             <Clock className="h-3 w-3" />
                             Registration
                         </span>
-                        <span className={cn("font-medium", isUrgent ? "text-red-600" : "text-slate-900")}>
-                            {daysUntilRegistration > 0 ? `${daysUntilRegistration} days left` : "Expired"}
+                        <span className={cn('font-medium', isUrgent ? 'text-red-600' : 'text-slate-900')}>
+                            {daysUntilRegistration > 0 ? `${daysUntilRegistration} days left` : 'Expired'}
                         </span>
                     </div>
                     <div className="w-full bg-slate-200 rounded-full h-2">
                         <div
-                            className={cn("h-2 rounded-full transition-all duration-500", isUrgent ? "bg-red-500" : "bg-green-500")}
+                            className={cn(
+                                'h-2 rounded-full transition-all duration-500',
+                                isUrgent ? 'bg-red-500' : 'bg-green-500',
+                            )}
                             style={{ width: `${Math.max(10, Math.min(90, (30 - daysUntilRegistration) * 3))}%` }}
                         />
                     </div>
@@ -127,18 +141,16 @@ export default function LeagueDetailsCard({ leagueDetails }: LeagueDetailsCardPr
                 <div className="border-t border-slate-100 pt-2">
                     <button
                         onClick={() => setIsExpanded(!isExpanded)}
-                        className="flex items-center justify-between w-full text-sm text-slate-600 hover:text-slate-900 transition-colors"
-                    >
+                        className="flex items-center justify-between w-full text-sm text-slate-600 hover:text-slate-900 transition-colors">
                         <span>More Details</span>
                         {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </button>
 
                     <div
                         className={cn(
-                            "overflow-hidden transition-all duration-300 ease-in-out",
-                            isExpanded ? " opacity-100 mt-2" : "max-h-0 opacity-0",
-                        )}
-                    >
+                            'overflow-hidden transition-all duration-300 ease-in-out',
+                            isExpanded ? ' opacity-100 mt-2' : 'max-h-0 opacity-0',
+                        )}>
                         <div className="space-y-2 px-4 pb-2">
                             <div className="flex items-center justify-between text-sm">
                                 <span className="flex items-center gap-1 text-slate-600">
@@ -146,7 +158,8 @@ export default function LeagueDetailsCard({ leagueDetails }: LeagueDetailsCardPr
                                     Duration
                                 </span>
                                 <span className="font-medium text-slate-900 text-xs">
-                                    {formatDate(leagueDetails?.league_start_date, 'ddMonYYYY')} - {formatDate(leagueDetails?.league_end_date, 'ddMonYYYY')}
+                                    {formatDate(leagueDetails?.league_start_date, 'ddMonYYYY')} -{' '}
+                                    {formatDate(leagueDetails?.league_end_date, 'ddMonYYYY')}
                                 </span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
@@ -154,14 +167,14 @@ export default function LeagueDetailsCard({ leagueDetails }: LeagueDetailsCardPr
                                     <Users className="h-3 w-3" />
                                     Auction
                                 </span>
-                                <span className="font-medium text-slate-900">{formatDate(leagueDetails?.auction_start_date, 'ddMonYYYY')}</span>
+                                <span className="font-medium text-slate-900">
+                                    {formatDate(leagueDetails?.auction_start_date, 'ddMonYYYY')}
+                                </span>
                             </div>
                         </div>
                         <RegistrationValidationCompact />
                     </div>
                 </div>
-
-
             </CardContent>
         </Card>
     )

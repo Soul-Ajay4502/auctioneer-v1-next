@@ -1,10 +1,10 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import { useParams, useRouter } from "next/navigation"
-import { Users, UserPlus, Trophy, Settings } from "lucide-react"
+import { Button } from '@/components/ui/button'
+import { useParams, useRouter } from 'next/navigation'
+import { Users, UserPlus, Trophy, Settings } from 'lucide-react'
 
-const NavigationButtons = ({ buttonContainerClassName = "grid grid-cols-2 gap-4" }: { buttonContainerClassName?: string }) => {
+const NavigationButtons = ({ buttonContainerClassName = 'grid grid-cols-2 gap-4' }: { buttonContainerClassName?: string }) => {
     const router = useRouter()
     const { leagueId } = useParams()
     const goToTeams = () => {

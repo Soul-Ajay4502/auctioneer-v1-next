@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import { Calendar, Users, MapPin, IndianRupee, Trophy, Clock, LinkIcon, Settings, UserPlus } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Progress } from "@/components/ui/progress"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { toast } from "sonner"
-import { useState } from "react"
-import NavigationButtons from "../league-components/navigation-buttons"
+import { Calendar, Users, MapPin, IndianRupee, Trophy, Clock, LinkIcon, Settings, UserPlus } from 'lucide-react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { Progress } from '@/components/ui/progress'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { toast } from 'sonner'
+import { useState } from 'react'
+import NavigationButtons from '../league-components/navigation-buttons'
 
 export interface LeagueData {
     league_id: number
@@ -54,12 +54,12 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
     const [isCopying, setIsCopying] = useState(false)
 
     const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
+        return new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
         })
     }
 
@@ -76,11 +76,11 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
     }
 
     const parseBreakPoints = () => {
-        return data.break_points?.split(",")?.map((point) => Number.parseInt(point))
+        return data.break_points?.split(',')?.map((point) => Number.parseInt(point))
     }
 
     const parseIncrements = () => {
-        return data.increments?.split(",")?.map((inc) => Number.parseInt(inc))
+        return data.increments?.split(',')?.map((inc) => Number.parseInt(inc))
     }
 
     const isRegistrationOpen = () => {
@@ -101,7 +101,7 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
         setTimeout(() => {
             setIsCopying(false)
         }, 4000)
-        toast.success("Join link copied to clipboard")
+        toast.success('Join link copied to clipboard')
     }
 
     return (
@@ -148,10 +148,8 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                         </CardHeader>
                         <CardContent>
                             <NavigationButtons />
-
                         </CardContent>
                     </Card>
-
                 </div>
                 <ScrollArea className="h-105" type="scroll">
                     {/* Status Cards */}
@@ -166,7 +164,9 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                     {data.registered_teams_count}/{data.total_teams}
                                 </div>
                                 <Progress value={getRegistrationProgress()} className="mt-2" />
-                                <p className="text-xs text-muted-foreground mt-1">{getRegistrationProgress().toFixed(1)}% capacity</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    {getRegistrationProgress().toFixed(1)}% capacity
+                                </p>
                             </CardContent>
                         </Card>
 
@@ -208,7 +208,9 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                         <Badge className="bg-red-100 text-red-800">Closed</Badge>
                                     )}
                                 </div>
-                                <p className="text-xs text-muted-foreground mt-1">Ends: {formatDate(data.registration_end_date)}</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    Ends: {formatDate(data.registration_end_date)}
+                                </p>
                             </CardContent>
                         </Card>
                     </div>
@@ -239,9 +241,12 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                             <p className="text-sm text-gray-600">{formatDate(data.auction_start_date)}</p>
                                         </div>
                                         <Badge
-                                            className={isAuctionStarted() ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}
-                                        >
-                                            {isAuctionStarted() ? "Live" : "Scheduled"}
+                                            className={
+                                                isAuctionStarted()
+                                                    ? 'bg-green-100 text-green-800'
+                                                    : 'bg-yellow-100 text-yellow-800'
+                                            }>
+                                            {isAuctionStarted() ? 'Live' : 'Scheduled'}
                                         </Badge>
                                     </div>
 
@@ -268,12 +273,16 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="p-3 bg-green-50 rounded-lg">
                                         <p className="text-sm text-gray-600">Player Base Price</p>
-                                        <p className="text-xl font-bold text-green-700">{formatCurrency(data.player_base_price)}</p>
+                                        <p className="text-xl font-bold text-green-700">
+                                            {formatCurrency(data.player_base_price)}
+                                        </p>
                                     </div>
 
                                     <div className="p-3 bg-blue-50 rounded-lg">
                                         <p className="text-sm text-gray-600">Team Budget</p>
-                                        <p className="text-xl font-bold text-blue-700">{formatCurrency(data.bid_amount_per_team)}</p>
+                                        <p className="text-xl font-bold text-blue-700">
+                                            {formatCurrency(data.bid_amount_per_team)}
+                                        </p>
                                     </div>
                                 </div>
 
@@ -282,7 +291,9 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                 <div>
                                     <p className="font-medium mb-2">Total Revenue Potential</p>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        {formatCurrency((Number.parseFloat(data.registration_fee) * data.total_players).toString())}
+                                        {formatCurrency(
+                                            (Number.parseFloat(data.registration_fee) * data.total_players).toString(),
+                                        )}
                                     </p>
                                     <p className="text-sm text-gray-600">From Player registration fees</p>
                                 </div>
@@ -328,7 +339,9 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                     <p className="font-medium">Minimum Players per Team</p>
                                     <p className="text-sm text-gray-600">Required squad size</p>
                                 </div>
-                                <Badge className="bg-purple-100 text-purple-800 text-lg px-3 py-1">{data.minimum_player_count}</Badge>
+                                <Badge className="bg-purple-100 text-purple-800 text-lg px-3 py-1">
+                                    {data.minimum_player_count}
+                                </Badge>
                             </div>
                         </CardContent>
                     </Card>
@@ -353,7 +366,11 @@ export function LeagueDashboard({ data }: LeagueDashboardProps) {
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-3">
                                     <div className="bg-white/20 rounded-lg p-3 font-mono text-sm break-all">{data.join_link}</div>
-                                    <Button disabled={isCopying} onClick={handleCopyLink} variant="secondary" className="whitespace-nowrap">
+                                    <Button
+                                        disabled={isCopying}
+                                        onClick={handleCopyLink}
+                                        variant="secondary"
+                                        className="whitespace-nowrap">
                                         Copy Link
                                     </Button>
                                 </div>

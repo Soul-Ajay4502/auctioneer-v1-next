@@ -18,5 +18,5 @@ export const userService = {
     getUserStats: async (): Promise<UserStatsResponse> => {
         const response = await api.get(endpoints.user.statistics)
         return response.data
-    }
+    },
 }

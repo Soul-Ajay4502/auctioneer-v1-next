@@ -1,10 +1,9 @@
-"use client"
+'use client'
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
-import { Player } from "@/utils/common-types-utils"
-import { Edit, Trash2, User, MapPin, Users, Activity, Phone, Mail, Trophy } from "lucide-react"
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
+import { Player } from '@/utils/common-types-utils'
+import { Edit, Trash2, User, MapPin, Users, Activity, Phone, Mail, Trophy } from 'lucide-react'
 
 interface PlayerAccordionProps {
     players: Player[]
@@ -13,7 +12,6 @@ interface PlayerAccordionProps {
 }
 
 export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAccordionProps) {
-
     return (
         <div className="w-full max-w-6xl mx-auto p-4">
             <div className="mb-6">
@@ -26,8 +24,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                     <AccordionItem
                         key={player.player_id}
                         value={player.player_id.toString()}
-                        className="border rounded-lg shadow-sm bg-white"
-                    >
+                        className="border rounded-lg shadow-sm bg-white">
                         <AccordionTrigger className="p-5 hover:no-underline hover:bg-gray-50 rounded-t-lg">
                             <div className="flex items-center justify-between w-full">
                                 <div className="flex items-center space-x-3">
@@ -46,8 +43,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                             e.stopPropagation()
                                             onEdit(player.player_id)
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-blue-100"
-                                    >
+                                        className="h-8 w-8 p-0 hover:bg-blue-100">
                                         <Edit className="w-4 h-4 text-blue-600" />
                                     </div>
                                     <div
@@ -55,8 +51,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                             e.stopPropagation()
                                             onDelete(player.player_id)
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-red-100"
-                                    >
+                                        className="h-8 w-8 p-0 hover:bg-red-100">
                                         <Trash2 className="w-4 h-4 text-red-600" />
                                     </div>
                                 </div>
@@ -78,7 +73,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                         <Users className="w-4 h-4 text-gray-500" />
                                         <div>
                                             <p className="text-sm font-medium text-gray-700">Team</p>
-                                            <p className="text-sm text-gray-600">{player.current_team || "Not assigned"}</p>
+                                            <p className="text-sm text-gray-600">{player.current_team || 'Not assigned'}</p>
                                         </div>
                                     </div>
 
@@ -127,13 +122,12 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                     <div className="flex items-center space-x-3">
                                         <div className="w-4 h-4 flex items-center justify-center">
                                             <div
-                                                className={`w-2 h-2 rounded-full ${player.is_admin_approved ? "bg-green-500" : "bg-yellow-500"}`}
-                                            ></div>
+                                                className={`w-2 h-2 rounded-full ${player.is_admin_approved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
                                         </div>
                                         <div>
                                             <p className="text-sm font-medium text-gray-700">Status</p>
                                             <p className="text-sm text-gray-600">
-                                                {player.is_admin_approved ? "Approved" : "Pending Approval"}
+                                                {player.is_admin_approved ? 'Approved' : 'Pending Approval'}
                                             </p>
                                         </div>
                                     </div>
@@ -154,4 +148,3 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
         </div>
     )
 }
-

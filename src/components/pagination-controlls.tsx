@@ -6,15 +6,9 @@ import {
     PaginationItem,
     PaginationLink,
     PaginationNext,
-    PaginationPrevious
+    PaginationPrevious,
 } from '@/components/ui/pagination'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 export interface PaginationProps {
     total: number
@@ -31,7 +25,7 @@ export const PaginationControls: React.FC<PaginationProps> = ({
     currentPage,
     hasNext,
     hasPrevious,
-    onPageChange
+    onPageChange,
 }) => {
     // Don't render pagination if there's only one page
     if (totalPages <= 1) return null
@@ -86,7 +80,7 @@ export const PaginationControls: React.FC<PaginationProps> = ({
                     <PaginationItem>
                         <PaginationPrevious
                             onClick={() => hasPrevious && onPageChange(currentPage - 1)}
-                            className={!hasPrevious ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                            className={!hasPrevious ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
                         />
                     </PaginationItem>
 
@@ -95,10 +89,7 @@ export const PaginationControls: React.FC<PaginationProps> = ({
                             {pageNumber === 'ellipsis' ? (
                                 <PaginationEllipsis />
                             ) : (
-                                <PaginationLink
-                                    onClick={() => onPageChange(pageNumber)}
-                                    isActive={currentPage === pageNumber}
-                                >
+                                <PaginationLink onClick={() => onPageChange(pageNumber)} isActive={currentPage === pageNumber}>
                                     {pageNumber}
                                 </PaginationLink>
                             )}
@@ -108,7 +99,7 @@ export const PaginationControls: React.FC<PaginationProps> = ({
                     <PaginationItem>
                         <PaginationNext
                             onClick={() => hasNext && onPageChange(currentPage + 1)}
-                            className={!hasNext ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                            className={!hasNext ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
                         />
                     </PaginationItem>
                 </PaginationContent>
@@ -116,10 +107,7 @@ export const PaginationControls: React.FC<PaginationProps> = ({
 
             {totalPages > 5 && (
                 <div className="flex  items-center gap-2 text-sm">
-                    <Select
-                        value={currentPage.toString()}
-                        onValueChange={(value) => onPageChange(parseInt(value))}
-                    >
+                    <Select value={currentPage.toString()} onValueChange={(value) => onPageChange(parseInt(value))}>
                         <SelectTrigger className="w-fit h-8">
                             <SelectValue placeholder={currentPage} />
                         </SelectTrigger>

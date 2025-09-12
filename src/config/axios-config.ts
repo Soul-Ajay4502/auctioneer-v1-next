@@ -66,5 +66,5 @@ export interface ApiResponse<T = AxiosResponse> {
     data: T
     message: string
     status: number
-    pagination?: any;
+    pagination?: any
 }

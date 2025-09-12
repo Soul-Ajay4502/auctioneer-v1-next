@@ -20,18 +20,20 @@ export default function LeaguesPage() {
     const pageSize = 9
     const router = useRouter()
 
-    const {
-        data,
-        isLoading,
-        isError,
-        error
-    } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ['leagues', page, pageSize],
         queryFn: () => leaguesService.getLeagues({ page, pageSize }),
     })
 
     const leagues = data?.data || []
-    const pagination = data?.pagination || { currentPage: 1, limit: pageSize, total: 0, totalPages: 1, hasNext: false, hasPrevious: false }
+    const pagination = data?.pagination || {
+        currentPage: 1,
+        limit: pageSize,
+        total: 0,
+        totalPages: 1,
+        hasNext: false,
+        hasPrevious: false,
+    }
     const totalPages = pagination.total > pagination.limit ? Math.ceil(pagination.total / pagination.limit) : 1
 
     const handlePageChange = (newPage: number) => {
@@ -78,10 +80,9 @@ export default function LeaguesPage() {
         <div className="p-2 max-w-8xl mx-8 ">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Leagues</h1>
-
             </div>
             <div className="flex z-20 rounded-full border bg-black items-center gap-2 fixed p-0 right-4 bottom-15">
-                <Plus size={80} color='white' />
+                <Plus size={80} color="white" />
             </div>
             {leagues.length === 0 ? (
                 <div className="text-center p-10 border rounded-lg bg-muted/50">
@@ -98,14 +99,9 @@ export default function LeaguesPage() {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                    >
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {leagues.map((league: League) => (
-                            <motion.div
-                                key={league.league_id}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
+                            <motion.div key={league.league_id} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 {/* <Card className="h-full">
                                     <CardHeader>
                                         <CardTitle className="flex items-center gap-2">

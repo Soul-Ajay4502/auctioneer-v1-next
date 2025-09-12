@@ -1,55 +1,52 @@
-"use client"
+'use client'
 
-import { Menu, X } from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { useParams, usePathname } from "next/navigation"
-import { useLeagueStore } from "@/store/league-details.store"
-import { toast } from "sonner"
-
-
+import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { useParams, usePathname } from 'next/navigation'
+import { useLeagueStore } from '@/store/league-details.store'
+import { toast } from 'sonner'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [hoveredItem, setHoveredItem] = useState<string | null>(null)
-    const { leagueId } = useParams();
-    const currentPath = usePathname();
-    const { leagueData } = useLeagueStore();
-    console.log(leagueData);
-
+    const { leagueId } = useParams()
+    const currentPath = usePathname()
+    const { leagueData } = useLeagueStore()
+    console.log(leagueData)
 
     const copyLeagueLink = () => {
         if (!leagueData) return
         navigator.clipboard.writeText(leagueData.join_link)
-        toast.success("Join link copied to clipboard")
+        toast.success('Join link copied to clipboard')
     }
 
     // Static navigation data - simplified without sub-items
     const navigationItems = [
         {
-            label: "League",
+            label: 'League',
             href: `/app/leagues/${leagueId}`,
             active: currentPath === `/app/leagues/${leagueId}`,
         },
         {
-            label: "Teams",
+            label: 'Teams',
             href: `/app/leagues/${leagueId}/team-details`,
             active: currentPath.includes(`/app/leagues/${leagueId}/team-details`),
         },
         {
-            label: "Players",
+            label: 'Players',
             href: `/app/leagues/${leagueId}/player-details`,
             active: currentPath.includes(`/app/leagues/${leagueId}/player-details`),
         },
         {
-            label: "Auction",
+            label: 'Auction',
             href: `/app/leagues/${leagueId}/auction`,
             active: currentPath.includes(`/app/leagues/${leagueId}/auction`),
         },
         {
-            label: "League Settings",
+            label: 'League Settings',
             href: `/app/leagues/${leagueId}/settings`,
             active: currentPath.includes(`/app/leagues/${leagueId}/settings`),
         },
@@ -67,27 +64,26 @@ export default function Navbar() {
                                 href={item.href}
                                 className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group"
                                 onMouseEnter={() => setHoveredItem(item.label)}
-                                onMouseLeave={() => setHoveredItem(null)}
-                            >
+                                onMouseLeave={() => setHoveredItem(null)}>
                                 {/* Background animation */}
                                 <div
-                                    className={`absolute inset-0 rounded-full transition-all duration-300 ${item.active
-                                        ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200"
-                                        : hoveredItem === item.label
-                                            ? "bg-gray-100 scale-105"
-                                            : "bg-transparent"
-                                        }`}
-                                ></div>
+                                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                                        item.active
+                                            ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200'
+                                            : hoveredItem === item.label
+                                              ? 'bg-gray-100 scale-105'
+                                              : 'bg-transparent'
+                                    }`}></div>
 
                                 {/* Text */}
                                 <span
-                                    className={`relative z-10 transition-colors duration-300 ${item.active
-                                        ? "text-blue-600 font-semibold"
-                                        : hoveredItem === item.label
-                                            ? "text-gray-900"
-                                            : "text-gray-600 hover:text-gray-900"
-                                        }`}
-                                >
+                                    className={`relative z-10 transition-colors duration-300 ${
+                                        item.active
+                                            ? 'text-blue-600 font-semibold'
+                                            : hoveredItem === item.label
+                                              ? 'text-gray-900'
+                                              : 'text-gray-600 hover:text-gray-900'
+                                    }`}>
                                     {item.label}
                                 </span>
 
@@ -98,9 +94,9 @@ export default function Navbar() {
 
                                 {/* Hover indicator */}
                                 <div
-                                    className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-gray-400 rounded-full transition-all duration-300 ${hoveredItem === item.label && !item.active ? "w-4 opacity-100" : "w-0 opacity-0"
-                                        }`}
-                                ></div>
+                                    className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-gray-400 rounded-full transition-all duration-300 ${
+                                        hoveredItem === item.label && !item.active ? 'w-4 opacity-100' : 'w-0 opacity-0'
+                                    }`}></div>
                             </Link>
                         ))}
                     </nav>
@@ -121,14 +117,13 @@ export default function Navbar() {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="md:hidden relative overflow-hidden hover:bg-gray-100 transition-colors duration-300"
-                            >
+                                className="md:hidden relative overflow-hidden hover:bg-gray-100 transition-colors duration-300">
                                 <div className="relative w-5 h-5">
                                     <Menu
-                                        className={`absolute inset-0 transition-all duration-300 ${isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"}`}
+                                        className={`absolute inset-0 transition-all duration-300 ${isOpen ? 'rotate-90 opacity-0' : 'rotate-0 opacity-100'}`}
                                     />
                                     <X
-                                        className={`absolute inset-0 transition-all duration-300 ${isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"}`}
+                                        className={`absolute inset-0 transition-all duration-300 ${isOpen ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'}`}
                                     />
                                 </div>
                                 <span className="sr-only">Toggle menu</span>
@@ -150,16 +145,16 @@ export default function Navbar() {
                                         <Link
                                             key={item.label}
                                             href={item.href}
-                                            className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:translate-x-2 ${item.active
-                                                ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 border-l-4 border-blue-500"
-                                                : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                                }`}
+                                            className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:translate-x-2 ${
+                                                item.active
+                                                    ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 border-l-4 border-blue-500'
+                                                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                                            }`}
                                             onClick={() => setIsOpen(false)}
                                             style={{
                                                 animationDelay: `${index * 50}ms`,
-                                                animation: isOpen ? "slideInRight 0.3s ease-out forwards" : "none",
-                                            }}
-                                        >
+                                                animation: isOpen ? 'slideInRight 0.3s ease-out forwards' : 'none',
+                                            }}>
                                             {item.label}
                                         </Link>
                                     ))}
@@ -169,8 +164,10 @@ export default function Navbar() {
                                 <div className="pt-4 px-2">
                                     <Button
                                         className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-                                        onClick={() => { copyLeagueLink(); setIsOpen(false) }}
-                                    >
+                                        onClick={() => {
+                                            copyLeagueLink()
+                                            setIsOpen(false)
+                                        }}>
                                         copy Link
                                     </Button>
                                 </div>
@@ -181,17 +178,17 @@ export default function Navbar() {
             </div>
 
             <style jsx>{`
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
+                @keyframes slideInRight {
+                    from {
+                        opacity: 0;
+                        transform: translateX(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            `}</style>
         </header>
     )
 }

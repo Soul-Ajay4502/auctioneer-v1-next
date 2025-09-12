@@ -173,7 +173,6 @@ const SignUpForm = () => {
                                     <Separator style={{ width: '45%', backgroundColor: '#E9EAEB' }} />
                                 </div>
 
-
                                 <div className="text-[14px] tex-[#0B0B0B]">
                                     Already have an account?{' '}
                                     <Link href="/sign-in" className="underline">

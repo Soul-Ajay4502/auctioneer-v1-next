@@ -63,8 +63,7 @@ const SignInPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="w-[360px] mx-auto"
-            >
+                className="w-[360px] mx-auto">
                 <Card className="">
                     <CardHeader>
                         <CardTitle className="text-2xl">Welcome back.</CardTitle>
@@ -118,11 +117,14 @@ const SignInPage = () => {
                         {/* Separator */}
 
                         <div className="flex items-center w-full my-4">
-                            <div className='w-1/2'><Separator className=" bg-muted" /></div>
+                            <div className="w-1/2">
+                                <Separator className=" bg-muted" />
+                            </div>
                             <span className="mx-2 text-xs text-muted-foreground">OR</span>
-                            <div className='w-1/2'><Separator className=" bg-muted" /></div>
+                            <div className="w-1/2">
+                                <Separator className=" bg-muted" />
+                            </div>
                         </div>
-
 
                         {/* Footer */}
                         <div className="text-center mt-4 text-sm">

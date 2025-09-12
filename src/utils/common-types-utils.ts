@@ -1,7 +1,7 @@
 export interface LeagueCreator {
-    id: number;
-    display_name?: string;
-    email?: string;
+    id: number
+    display_name?: string
+    email?: string
 }
 
 export interface League {
@@ -69,19 +69,19 @@ export interface Teams {
 }
 
 export interface Player {
-    player_id: number;
-    player_name: string;
-    place: string;
-    whatsapp_no: string;
-    current_team: string | null;
-    player_role: string;
-    batting_style: string;
-    bowling_style: string;
-    player_photo: string | null;
-    sold_to: string | null;
-    sold_amount: number | null;
-    is_unsold: boolean;
-    email: string;
-    is_admin_approved: boolean;
-    league: League;
-};
+    player_id: number
+    player_name: string
+    place: string
+    whatsapp_no: string
+    current_team: string | null
+    player_role: string
+    batting_style: string
+    bowling_style: string
+    player_photo: string | null
+    sold_to: string | null
+    sold_amount: number | null
+    is_unsold: boolean
+    email: string
+    is_admin_approved: boolean
+    league: League
+}

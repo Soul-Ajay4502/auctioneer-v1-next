@@ -5,13 +5,10 @@ import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Trophy, Loader2, DollarSign, UserCheck } from 'lucide-react'
 import { userService } from '@/services/user.services'
-import {
-    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-} from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { useAuthStore } from '@/store/auth.store'
 
 export default function LeaguesPage() {
-
     const fetchMyDetails = useAuthStore((state) => state.fetchMyDetails)
 
     useEffect(() => {
@@ -28,10 +25,7 @@ export default function LeaguesPage() {
     }, [fetchMyDetails])
 
     // Fetch user stats
-    const {
-        data: statsResponse,
-        isLoading: isLoadingStats
-    } = useQuery({
+    const { data: statsResponse, isLoading: isLoadingStats } = useQuery({
         queryKey: ['userStats'],
         queryFn: userService.getUserStats,
     })
@@ -40,16 +34,14 @@ export default function LeaguesPage() {
         leaguesCount: 0,
         totalRevenue: 0,
         uniquePlayersCount: 0,
-        chartData: { labels: [], values: [] }
+        chartData: { labels: [], values: [] },
     }
 
     // Transform chart data for Recharts
     const chartData = userStats.chartData.labels.map((label, index) => ({
         month: label,
-        count: userStats.chartData.values[index]
+        count: userStats.chartData.values[index],
     }))
-
-
 
     return (
         <div className="p-6 max-w-8xl ">
@@ -119,10 +111,7 @@ export default function LeaguesPage() {
                                 </div>
                             ) : chartData.length > 0 ? (
                                 <ResponsiveContainer width="100%" height="100%">
-                                    <BarChart
-                                        data={chartData}
-                                        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                                    >
+                                    <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <XAxis dataKey="month" />
                                         <YAxis allowDecimals={false} />
@@ -139,7 +128,6 @@ export default function LeaguesPage() {
                     </CardContent>
                 </Card>
             </div>
-
         </div>
     )
 }

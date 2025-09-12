@@ -1,7 +1,7 @@
-import { Calendar, Users, IndianRupee, ExternalLink } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Calendar, Users, IndianRupee, ExternalLink } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 interface LeagueData {
     league_id: number
@@ -35,12 +35,11 @@ interface LeagueCardProps {
 }
 
 export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetails, isCopying }: LeagueCardProps) {
-
     const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
+        return new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
         })
     }
 
@@ -51,7 +50,7 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
             <CardHeader className="border-b-4 border-b-neutral-300 rounded-full">
                 <div className="flex items-center justify-between">
                     <CardTitle className="text-xl font-bold">{leagueData.league_name}</CardTitle>
-                    <Badge variant={isRegistrationOpen ? "default" : "secondary"}>{isRegistrationOpen ? "Open" : "Closed"}</Badge>
+                    <Badge variant={isRegistrationOpen ? 'default' : 'secondary'}>{isRegistrationOpen ? 'Open' : 'Closed'}</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">{leagueData.league_locations}</p>
 
@@ -82,10 +81,6 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
             </CardHeader>
 
             <CardContent className="space-y-4">
-
-
-
-
                 <div className="space-y-2">
                     <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -108,7 +103,7 @@ export default function LeagueCard({ leagueData, handleCopyLink, handleViewDetai
             </CardContent>
 
             <CardFooter className="flex gap-2">
-                <Button variant='outline' className="flex-1 rounded-sm" onClick={() => handleViewDetails()}>
+                <Button variant="outline" className="flex-1 rounded-sm" onClick={() => handleViewDetails()}>
                     View Details
                 </Button>
                 <Button disabled={isCopying} onClick={() => handleCopyLink()} variant="outline" size="icon">

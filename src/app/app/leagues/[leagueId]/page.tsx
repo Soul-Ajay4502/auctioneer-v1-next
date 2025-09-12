@@ -1,29 +1,21 @@
-
 'use client'
 
-import { leaguesService } from "@/services/leagues.services";
-import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
-import { useParams } from "next/navigation"
-import { LeagueDashboard } from "./league-dashboard";
-import { League } from "@/utils/common-types-utils";
-import { useLeagueStore } from "@/store/league-details.store";
-import { useEffect } from "react";
+import { leaguesService } from '@/services/leagues.services'
+import { useQuery } from '@tanstack/react-query'
+import { Loader2 } from 'lucide-react'
+import { useParams } from 'next/navigation'
+import { LeagueDashboard } from './league-dashboard'
+import { League } from '@/utils/common-types-utils'
+import { useLeagueStore } from '@/store/league-details.store'
+import { useEffect } from 'react'
 
 const Page = () => {
+    const { leagueId } = useParams()
 
-    const { leagueId } = useParams();
-
-
-    const {
-        data,
-        isLoading,
-        isError,
-        error
-    } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ['leagues', leagueId],
         queryFn: () => leaguesService.getLeagueById(leagueId as string),
-        enabled: !!leagueId
+        enabled: !!leagueId,
     })
 
     useEffect(() => {
@@ -41,9 +33,6 @@ const Page = () => {
     if (!data?.data) {
         return null
     }
-
-
-
 
     return (
         <div>

@@ -1,11 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import {
-    BotMessageSquare,
-    NotepadText,
-    Trophy,
-} from 'lucide-react'
+import { BotMessageSquare, NotepadText, Trophy } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import { NavUser } from '@/components/nav-user'
@@ -25,7 +21,6 @@ const staticData = {
             url: '/app/leagues',
             icon: NotepadText,
         },
-
     ],
 }
 
@@ -42,9 +37,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     return (
         <Sidebar collapsible="icon" variant="floating" {...props}>
-            <SidebarHeader >
+            <SidebarHeader>
                 <SidebarMenuButton>
-                    <Trophy className="h-6 w-6" /> <div className='text-sm font-bold'> Auctioneer</div>
+                    <Trophy className="h-6 w-6" /> <div className="text-sm font-bold"> Auctioneer</div>
                 </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent className="mt-3">

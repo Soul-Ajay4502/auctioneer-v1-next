@@ -1,6 +1,5 @@
-
 import React from 'react'
-import { Button, } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 
 export interface PaginationProps {
     total: number
@@ -35,8 +34,7 @@ const PaginationWithLimitSelect = ({
                     id="pageSize"
                     value={pageSize}
                     onChange={(e) => onPageSizeChange(Number(e.target.value))}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
+                    className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     {pageSizeOptions.map((size) => (
                         <option key={size} value={size}>
                             {size}
@@ -51,8 +49,7 @@ const PaginationWithLimitSelect = ({
                     size="sm"
                     onClick={() => onPageChange(currentPage - 1)}
                     disabled={!hasPrevious}
-                    className="px-3 py-1"
-                >
+                    className="px-3 py-1">
                     Previous
                 </Button>
 
@@ -82,11 +79,10 @@ const PaginationWithLimitSelect = ({
                         return (
                             <Button
                                 key={page}
-                                variant={page === currentPage ? "default" : "outline"}
+                                variant={page === currentPage ? 'default' : 'outline'}
                                 size="sm"
                                 onClick={() => onPageChange(page)}
-                                className="w-8 h-8 p-0"
-                            >
+                                className="w-8 h-8 p-0">
                                 {page}
                             </Button>
                         )
@@ -98,8 +94,7 @@ const PaginationWithLimitSelect = ({
                     size="sm"
                     onClick={() => onPageChange(currentPage + 1)}
                     disabled={!hasNext}
-                    className="px-3 py-1"
-                >
+                    className="px-3 py-1">
                     Next
                 </Button>
             </div>

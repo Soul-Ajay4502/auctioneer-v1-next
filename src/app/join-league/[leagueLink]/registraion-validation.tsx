@@ -1,8 +1,6 @@
-
-
-import { AlertTriangle, Shield, CreditCard, MapPin, CheckCircle } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { AlertTriangle, Shield, CreditCard, MapPin, CheckCircle } from 'lucide-react'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 function RegistrationValidationCompact() {
     return (
@@ -24,7 +22,9 @@ function RegistrationValidationCompact() {
 
                     <div className="flex items-center gap-2">
                         <MapPin className="h-3 w-3 text-purple-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-slate-700 text-left">Location must match league and ID proof for admin approval</span>
+                        <span className="text-slate-700 text-left">
+                            Location must match league and ID proof for admin approval
+                        </span>
                     </div>
                 </div>
             </AlertDescription>
@@ -32,33 +32,31 @@ function RegistrationValidationCompact() {
     )
 }
 
-
-
 function RegistrationValidation() {
     const validationRules = [
         {
             icon: Shield,
-            title: "Admin Approval Required",
-            description: "Your registration is not valid until you have been approved by the league admin.",
-            color: "text-blue-600",
-            bgColor: "bg-blue-50",
-            borderColor: "border-blue-200",
+            title: 'Admin Approval Required',
+            description: 'Your registration is not valid until you have been approved by the league admin.',
+            color: 'text-blue-600',
+            bgColor: 'bg-blue-50',
+            borderColor: 'border-blue-200',
         },
         {
             icon: CreditCard,
-            title: "Payment Verification",
-            description: "Your registration is not valid if the payment screenshot is not valid.",
-            color: "text-orange-600",
-            bgColor: "bg-orange-50",
-            borderColor: "border-orange-200",
+            title: 'Payment Verification',
+            description: 'Your registration is not valid if the payment screenshot is not valid.',
+            color: 'text-orange-600',
+            bgColor: 'bg-orange-50',
+            borderColor: 'border-orange-200',
         },
         {
             icon: MapPin,
-            title: "Location Verification",
-            description: "Your registration is not valid if the location mismatches with the league location and ID proof.",
-            color: "text-purple-600",
-            bgColor: "bg-purple-50",
-            borderColor: "border-purple-200",
+            title: 'Location Verification',
+            description: 'Your registration is not valid if the location mismatches with the league location and ID proof.',
+            color: 'text-purple-600',
+            bgColor: 'bg-purple-50',
+            borderColor: 'border-purple-200',
         },
     ]
 
@@ -86,8 +84,7 @@ function RegistrationValidation() {
                         return (
                             <div
                                 key={index}
-                                className={`p-4 rounded-lg border-l-4 ${rule.bgColor} ${rule.borderColor} hover:shadow-sm transition-shadow`}
-                            >
+                                className={`p-4 rounded-lg border-l-4 ${rule.bgColor} ${rule.borderColor} hover:shadow-sm transition-shadow`}>
                                 <div className="flex items-start gap-3">
                                     <div className={`p-2 rounded-full bg-white shadow-sm`}>
                                         <IconComponent className={`h-4 w-4 ${rule.color}`} />
