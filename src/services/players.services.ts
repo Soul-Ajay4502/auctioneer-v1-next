@@ -22,6 +22,15 @@ const playersService = {
         const response = await api.get(endpoints.players.getById.replace(':id', playerId))
         return response.data
     },
+    editPlayer: async (playerId: number, data: { isApproved?: boolean }): Promise<ApiResponse> => {
+        const response = await api.patch(endpoints.players.getById.replace(':id', playerId.toString()), data)
+        return response.data
+    },
+    deletePlayer: async (playerId: number): Promise<ApiResponse> => {
+        const response = await api.delete(endpoints.players.getById.replace(':id', playerId.toString()))
+        return response.data
+    },
+
 }
 
 export default playersService

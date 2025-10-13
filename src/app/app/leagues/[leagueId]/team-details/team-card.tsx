@@ -3,7 +3,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Phone, User, Palette, Calendar } from 'lucide-react'
+import { Phone, User, Palette, Calendar, Trash2, Edit } from 'lucide-react'
 
 const getJerseyColorClass = (color?: string) => {
   const colorMap: Record<string, string> = {
@@ -37,13 +37,30 @@ const formatDate = (dateString?: string) => {
 
 interface TeamCardProps {
   team: any
+  handleDelete: (teamId: number) => void
 }
 
-const TeamCard = ({ team }: TeamCardProps) => (
+const TeamCard = ({ team, handleDelete }: TeamCardProps) => (
   <Card
     key={team.id}
-    className="rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 bg-white/70 backdrop-blur-sm"
+    className="relative rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 bg-white/70 backdrop-blur-sm"
   >
+    <div className='absolute top-1 right-2 w-fit'>
+      <button
+        onClick={() => handleDelete(team.id)}
+        className=" p-1 rounded-full hover:bg-gray-100"
+      >
+        <Trash2 className="w-4 h-4 text-gray-500" />
+      </button>
+
+      <button
+        // onClick={handleEdit}
+        className=" p-1 rounded-full hover:bg-gray-100"
+      >
+        <Edit className="w-4 h-4 text-gray-500" />
+      </button>
+
+    </div>
     <CardHeader className="pb-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

@@ -2,12 +2,15 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { Player } from '@/utils/common-types-utils'
-import { Edit, Trash2, User, MapPin, Users, Activity, Phone, Mail, Trophy } from 'lucide-react'
+import { Edit, Trash2, User, MapPin, Users, Activity, Phone, Mail, Trophy, CircleCheck, CircleX } from 'lucide-react'
 
 interface PlayerAccordionProps {
     players: Player[]
-    onEdit: (playerId: number) => void
+    onEdit: (playerId: number, data?:
+        { isApproved?: boolean }
+    ) => void
     onDelete: (playerId: number) => void
 }
 
@@ -25,7 +28,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                         key={player.player_id}
                         value={player.player_id.toString()}
                         className="border rounded-lg shadow-sm bg-white">
-                        <AccordionTrigger className="p-5 hover:no-underline hover:bg-gray-50 rounded-t-lg">
+                        <AccordionTrigger className="p-5 hover:no-underline hover:bg-gray-50 rounded-t-lg relative">
                             <div className="flex items-center justify-between w-full">
                                 <div className="flex items-center space-x-3">
                                     <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -37,13 +40,13 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                     </div>
                                 </div>
 
-                                <div className="flex items-center space-x-2 mr-4">
+                                <div className="flex items-center space-x-2 mr-4 h-fit justify-center">
                                     <div
                                         onClick={(e) => {
                                             e.stopPropagation()
                                             onEdit(player.player_id)
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-blue-100">
+                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center">
                                         <Edit className="w-4 h-4 text-blue-600" />
                                     </div>
                                     <div
@@ -51,9 +54,36 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                             e.stopPropagation()
                                             onDelete(player.player_id)
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-red-100">
+                                        className="h-8 w-8 p-0 hover:bg-red-100 flex items-center justify-center">
                                         <Trash2 className="w-4 h-4 text-red-600" />
                                     </div>
+
+                                    <div
+                                        onClick={(e) => {
+                                            if (player.is_admin_approved) return
+                                            e.stopPropagation()
+                                            onEdit(player.player_id, { isApproved: true })
+                                        }}
+                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center">
+                                        <CircleCheck className={cn("w-4 h-4", {
+                                            'text-green-600': !player.is_admin_approved,
+                                            'text-gray-400': player.is_admin_approved,
+                                        })} />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="absolute -right-4 -top-3">
+                                <div
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        onEdit(player.player_id, { isApproved: false })
+                                    }}
+                                    className="h-8 w-8 p-1 hover:bg-blue-100 rounded-full cursor-pointer"
+                                    title='reject player'
+
+                                >
+                                    <CircleX className="w-6 h-6 text-black" />
                                 </div>
                             </div>
                         </AccordionTrigger>

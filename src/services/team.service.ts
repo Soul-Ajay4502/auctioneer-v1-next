@@ -15,4 +15,8 @@ export const teamsService = {
         const response = await api.get(endpoints.teams.getById.replace(':id', teamId))
         return response.data
     },
+    deleteTeam: async (teamId: number): Promise<ApiResponse> => {
+        const response = await api.delete(endpoints.teams.getById.replace(':id', teamId.toString()))
+        return response.data
+    },
 }
