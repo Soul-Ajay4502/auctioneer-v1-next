@@ -44,7 +44,6 @@ export function DeleteWithAlert({
     // isAlertOpen,
     // setIsAlertOpen,
 }: DeleteWithAlertProps) {
-
     const [isAlertOpen, setIsAlertOpen] = useState(false)
     const mutation = useMutation({
         mutationFn: async () => {

@@ -1,108 +1,91 @@
+'use client'
 
-"use client";
-
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { z } from "zod";
-import { AxiosError } from "axios";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { Plus, Users, User, Phone, Palette, Image, CircleX, CircleCheck } from "lucide-react";
-import { api } from "@/config/axios-config";
-import { axiosErrorToast } from "@/utils/axios-error-toast.utils";
-import endpoints from "@/services/api-endpoints";
-import { Teams } from "@/utils/common-types-utils";
-import { Spinner } from "../ui/spinner";
-
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { z } from 'zod'
+import { AxiosError } from 'axios'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { Plus, Users, User, Phone, Palette, Image, CircleX, CircleCheck } from 'lucide-react'
+import { api } from '@/config/axios-config'
+import { axiosErrorToast } from '@/utils/axios-error-toast.utils'
+import endpoints from '@/services/api-endpoints'
+import { Teams } from '@/utils/common-types-utils'
+import { Spinner } from '../ui/spinner'
 
 const createTeamSchema = z.object({
-    team_name: z.string().min(2, "Team name must be at least 2 characters"),
-    team_owner: z.string().min(2, "Team owner name is required"),
+    team_name: z.string().min(2, 'Team name must be at least 2 characters'),
+    team_owner: z.string().min(2, 'Team owner name is required'),
     team_owner_phone: z
         .string()
-        .min(10, "Phone number must be at least 10 digits")
-        .regex(/^\+?[\d\s-()]+$/, "Invalid phone number format"),
-    jersey_color: z.string().min(1, "Jersey color is required"),
-    logo_url: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-});
+        .min(10, 'Phone number must be at least 10 digits')
+        .regex(/^\+?[\d\s-()]+$/, 'Invalid phone number format'),
+    jersey_color: z.string().min(1, 'Jersey color is required'),
+    logo_url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
+})
 
-type CreateTeamFormValues = z.infer<typeof createTeamSchema>;
+type CreateTeamFormValues = z.infer<typeof createTeamSchema>
 
 interface CreateTeamsModalProps {
-    leagueId: number;
-    children?: React.ReactNode;
-    defaultValues?: Teams;
-    onAfterSuccess?: () => void;
+    leagueId: number
+    children?: React.ReactNode
+    defaultValues?: Teams
+    onAfterSuccess?: () => void
 }
 
 export default function CreateTeamsModal({ leagueId, defaultValues, onAfterSuccess, children }: CreateTeamsModalProps) {
-    const [open, setOpen] = useState(false);
-    const queryClient = useQueryClient();
+    const [open, setOpen] = useState(false)
+    const queryClient = useQueryClient()
 
     const form = useForm<CreateTeamFormValues>({
         resolver: zodResolver(createTeamSchema),
         defaultValues: {
-            team_name: defaultValues?.team_name || "",
-            team_owner: defaultValues?.team_owner || "",
-            team_owner_phone: defaultValues?.team_owner_phone || "",
-            jersey_color: defaultValues?.jersey_color || "",
-            logo_url: defaultValues?.logo_url || "",
+            team_name: defaultValues?.team_name || '',
+            team_owner: defaultValues?.team_owner || '',
+            team_owner_phone: defaultValues?.team_owner_phone || '',
+            jersey_color: defaultValues?.jersey_color || '',
+            logo_url: defaultValues?.logo_url || '',
         },
-    });
+    })
 
     const createTeamMutation = useMutation({
         mutationFn: (values: CreateTeamFormValues) => {
             const body = { ...values, league_id: leagueId }
             if (defaultValues) {
-                return api.patch(endpoints.teams.getById.replace(":id", defaultValues.id.toString()), body)
+                return api.patch(endpoints.teams.getById.replace(':id', defaultValues.id.toString()), body)
             }
             return api.post(endpoints.teams.create, body)
         },
         onSuccess: () => {
-            toast.success("Team created successfully! 🎉");
-            form.reset();
-            setOpen(false);
+            toast.success('Team created successfully! 🎉')
+            form.reset()
+            setOpen(false)
             if (onAfterSuccess) {
-                onAfterSuccess();
+                onAfterSuccess()
             }
         },
         onError: (error: AxiosError) => {
-            axiosErrorToast(error, "Failed to create team");
+            axiosErrorToast(error, 'Failed to create team')
         },
-    });
+    })
 
     const onSubmit = (values: CreateTeamFormValues) => {
-        createTeamMutation.mutate(values);
-    };
+        createTeamMutation.mutate(values)
+    }
 
     const onClose = () => {
         if (open) {
-            form.reset();
-            setOpen(false);
+            form.reset()
+            setOpen(false)
+        } else {
+            setOpen(true)
         }
-        else {
-            setOpen(true);
-        }
-    };
+    }
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
@@ -118,10 +101,12 @@ export default function CreateTeamsModal({ leagueId, defaultValues, onAfterSucce
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2">
                         <Users className="h-5 w-5" />
-                        {defaultValues ? `Edit Team ${defaultValues.team_name}` : "Create New Team"}
+                        {defaultValues ? `Edit Team ${defaultValues.team_name}` : 'Create New Team'}
                     </DialogTitle>
                     <DialogDescription>
-                        {defaultValues ? "Edit the team details below." : "Add a new team to your League. Fill in the team details below."}
+                        {defaultValues
+                            ? 'Edit the team details below.'
+                            : 'Add a new team to your League. Fill in the team details below.'}
                     </DialogDescription>
                 </DialogHeader>
 
@@ -218,17 +203,10 @@ export default function CreateTeamsModal({ leagueId, defaultValues, onAfterSucce
                                 variant="ghost"
                                 onClick={onClose}
                                 disabled={createTeamMutation.isPending}
-                                className="rounded-full"
-                            >
+                                className="rounded-full">
                                 <CircleX className="h-6 w-6" color="red" />
-
                             </Button>
-                            <Button
-                                type="submit"
-                                variant='outline'
-                                disabled={createTeamMutation.isPending}
-                                className="gap-2"
-                            >
+                            <Button type="submit" variant="outline" disabled={createTeamMutation.isPending} className="gap-2">
                                 {createTeamMutation.isPending ? (
                                     <Spinner />
                                 ) : (
@@ -242,5 +220,5 @@ export default function CreateTeamsModal({ leagueId, defaultValues, onAfterSucce
                 </Form>
             </DialogContent>
         </Dialog>
-    );
+    )
 }

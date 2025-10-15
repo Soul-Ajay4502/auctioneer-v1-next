@@ -30,7 +30,6 @@ const playersService = {
         const response = await api.delete(endpoints.players.getById.replace(':id', playerId.toString()))
         return response.data
     },
-
 }
 
 export default playersService

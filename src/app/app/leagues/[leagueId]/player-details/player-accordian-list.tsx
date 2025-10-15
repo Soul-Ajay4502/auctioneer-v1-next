@@ -8,9 +8,7 @@ import { Edit, Trash2, User, MapPin, Users, Activity, Phone, Mail, Trophy, Circl
 
 interface PlayerAccordionProps {
     players: Player[]
-    onEdit: (playerId: number, data?:
-        { isApproved?: boolean }
-    ) => void
+    onEdit: (playerId: number, data?: { isApproved?: boolean }) => void
     onDelete: (playerId: number) => void
 }
 
@@ -50,16 +48,13 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                         <Edit className="w-4 h-4 text-blue-600" />
                                     </div>
 
-
                                     <div
                                         onClick={(e) => {
                                             e.stopPropagation()
                                             onEdit(player.player_id, { isApproved: false })
                                         }}
                                         className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center cursor-pointer"
-                                        title='reject player'
-
-                                    >
+                                        title="reject player">
                                         <CircleX className="w-4 h-4 text-black" />
                                     </div>
 
@@ -70,12 +65,13 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                             onEdit(player.player_id, { isApproved: true })
                                         }}
                                         className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center cursor-pointer">
-                                        <CircleCheck className={cn("w-4 h-4", {
-                                            'text-green-600': !player.is_admin_approved,
-                                            'text-gray-400': player.is_admin_approved,
-                                        })} />
+                                        <CircleCheck
+                                            className={cn('w-4 h-4', {
+                                                'text-green-600': !player.is_admin_approved,
+                                                'text-gray-400': player.is_admin_approved,
+                                            })}
+                                        />
                                     </div>
-
                                 </div>
                             </div>
                             <div className="absolute -right-4 -top-4 cursor-pointer">
