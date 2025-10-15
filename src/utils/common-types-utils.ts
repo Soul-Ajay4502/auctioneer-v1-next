@@ -66,6 +66,7 @@ export interface Teams {
     team_owner: string
     team_owner_phone: string
     jersey_color: string
+    logo_url: string
 }
 
 export interface Player {

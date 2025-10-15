@@ -4,19 +4,23 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Phone, User, Palette, Calendar, Trash2, Edit } from 'lucide-react'
+import { DeleteWithAlert } from '@/components/delete-with-alert'
+import { toast } from 'sonner'
+import CreateTeamsModal from '@/components/modals/create-teams-modal'
+import { Teams } from '@/utils/common-types-utils'
 
 const getJerseyColorClass = (color?: string) => {
   const colorMap: Record<string, string> = {
-    Red: 'bg-red-500',
-    Blue: 'bg-blue-500',
-    Green: 'bg-green-500',
-    Yellow: 'bg-yellow-500',
-    Orange: 'bg-orange-500',
-    Purple: 'bg-purple-500',
-    Indigo: 'bg-indigo-500',
-    Violet: 'bg-violet-500',
-    Pink: 'bg-pink-500',
-    Black: 'bg-black',
+    red: 'bg-red-500',
+    blue: 'bg-blue-500',
+    green: 'bg-green-500',
+    yellow: 'bg-yellow-500',
+    orange: 'bg-orange-500',
+    purple: 'bg-purple-500',
+    indigo: 'bg-indigo-500',
+    violet: 'bg-violet-500',
+    pink: 'bg-pink-500',
+    black: 'bg-black',
   }
   return colorMap[color ?? ''] || 'bg-gray-300'
 }
@@ -36,30 +40,33 @@ const formatDate = (dateString?: string) => {
 }
 
 interface TeamCardProps {
-  team: any
-  handleDelete: (teamId: number) => void
+  team: Teams
+  refetchTeams: () => void
 }
 
-const TeamCard = ({ team, handleDelete }: TeamCardProps) => (
+const TeamCard = ({ team, refetchTeams }: TeamCardProps) => (
   <Card
     key={team.id}
     className="relative rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 bg-white/70 backdrop-blur-sm"
   >
     <div className='absolute top-1 right-2 w-fit'>
-      <button
-        onClick={() => handleDelete(team.id)}
-        className=" p-1 rounded-full hover:bg-gray-100"
+      <DeleteWithAlert
+        title={`Are you sure you want to delete the team ${team.team_name}?`}
+        description="This action cannot be undone."
+        endpoint={`/teams/${team.id}`}
+        onAfterSuccess={() => { toast.success(`Team ${team.team_name} deleted successfully!`); refetchTeams() }}
       >
         <Trash2 className="w-4 h-4 text-gray-500" />
-      </button>
+      </DeleteWithAlert>
 
-      <button
-        // onClick={handleEdit}
-        className=" p-1 rounded-full hover:bg-gray-100"
-      >
-        <Edit className="w-4 h-4 text-gray-500" />
-      </button>
-
+      <CreateTeamsModal leagueId={team.league_id} defaultValues={team} onAfterSuccess={refetchTeams} >
+        <button
+          // onClick={handleEdit}
+          className=" p-1 rounded-full hover:bg-gray-100"
+        >
+          <Edit className="w-4 h-4 text-gray-500" />
+        </button>
+      </CreateTeamsModal>
     </div>
     <CardHeader className="pb-2">
       <div className="flex items-center justify-between">
@@ -81,9 +88,9 @@ const TeamCard = ({ team, handleDelete }: TeamCardProps) => (
         </div>
         <div
           className={`w-3.5 h-3.5 rounded-full ring-2 ring-white ${getJerseyColorClass(
-            team.jersey_color
+            team.jersey_color.toLowerCase()
           )}`}
-          aria-label={`Jersey color: ${team.jersey_color}`}
+          aria-label={`Jersey color: ${team.jersey_color.toLowerCase()}`}
         />
       </div>
     </CardHeader>

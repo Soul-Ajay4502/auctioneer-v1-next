@@ -22,7 +22,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                 <p className="text-gray-600">Manage your cricket team players</p>
             </div>
 
-            <Accordion type="single" collapsible className="w-full space-y-2">
+            <Accordion type="single" collapsible className="w-full space-y-3">
                 {players.map((player) => (
                     <AccordionItem
                         key={player.player_id}
@@ -46,16 +46,21 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                             e.stopPropagation()
                                             onEdit(player.player_id)
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center">
+                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center cursor-pointer">
                                         <Edit className="w-4 h-4 text-blue-600" />
                                     </div>
+
+
                                     <div
                                         onClick={(e) => {
                                             e.stopPropagation()
-                                            onDelete(player.player_id)
+                                            onEdit(player.player_id, { isApproved: false })
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-red-100 flex items-center justify-center">
-                                        <Trash2 className="w-4 h-4 text-red-600" />
+                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center cursor-pointer"
+                                        title='reject player'
+
+                                    >
+                                        <CircleX className="w-4 h-4 text-black" />
                                     </div>
 
                                     <div
@@ -64,7 +69,7 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
                                             e.stopPropagation()
                                             onEdit(player.player_id, { isApproved: true })
                                         }}
-                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center">
+                                        className="h-8 w-8 p-0 hover:bg-blue-100 flex items-center justify-center cursor-pointer">
                                         <CircleCheck className={cn("w-4 h-4", {
                                             'text-green-600': !player.is_admin_approved,
                                             'text-gray-400': player.is_admin_approved,
@@ -73,17 +78,14 @@ export default function PlayerAccordion({ players, onEdit, onDelete }: PlayerAcc
 
                                 </div>
                             </div>
-                            <div className="absolute -right-4 -top-3">
+                            <div className="absolute -right-4 -top-4 cursor-pointer">
                                 <div
                                     onClick={(e) => {
                                         e.stopPropagation()
-                                        onEdit(player.player_id, { isApproved: false })
+                                        onDelete(player.player_id)
                                     }}
-                                    className="h-8 w-8 p-1 hover:bg-blue-100 rounded-full cursor-pointer"
-                                    title='reject player'
-
-                                >
-                                    <CircleX className="w-6 h-6 text-black" />
+                                    className="h-8 w-8 p-0 rounded-full hover:bg-red-100 flex items-center justify-center">
+                                    <Trash2 className="w-4 h-4 text-red-600" />
                                 </div>
                             </div>
                         </AccordionTrigger>
